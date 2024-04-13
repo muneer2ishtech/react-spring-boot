@@ -33,8 +33,8 @@ const ViewBook = ({ match }) => {
         history.push('/books');
     };
 
-    const handleAddNewBook = () => {
-        history.push('/books/new');
+    const handleEditBook = () => {
+        history.push(`/books/${id}/edit`);
     };
 
     return (
@@ -61,7 +61,7 @@ const ViewBook = ({ match }) => {
                 </tbody>
             </table>
             <button onClick={handleDelete}>Delete</button>
-            <button onClick={handleAddNewBook}>Add New Book</button>
+            <button onClick={handleEditBook}>Edit Book</button>
             <button onClick={handleBackToList}>Back to Book List</button>
         </div>
     );
