@@ -1,5 +1,6 @@
-# Getting Started with React App
+# books-react-app
 
+## Build
 - To install required modules
 
     `npm install`
@@ -20,6 +21,5 @@
 
     `npm run build`
 
-# References
+## References
 [React reference](./react.md)
-

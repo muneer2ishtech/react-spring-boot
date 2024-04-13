@@ -1,6 +1,6 @@
 {
-  "short_name": "My Book App",
-  "name": "My Book App using React",
+  "short_name": "Books App",
+  "name": "Books App using React",
   "icons": [
     {
       "src": "favicon.ico",
