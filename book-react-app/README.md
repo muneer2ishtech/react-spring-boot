@@ -1,5 +1,15 @@
 # books-react-app
 
+## Environment
+- Add following to `.env.local` file
+    - For **development**
+
+        `NODE_ENV=development`
+
+    - For **production**
+
+        `NODE_ENV=production`
+
 ## Build
 - To install required modules
 
