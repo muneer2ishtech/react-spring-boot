@@ -1,14 +1,12 @@
-// components/books/EditBook.jsx
-
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 
 const EditBook = ({ match }) => {
     const { id } = match.params;
     const [book, setBook] = useState({});
     const [originalBook] = useState({});
-    const history = useHistory();
+    const history = createBrowserHistory();
 
     useEffect(() => {
         // Fetch book data from API based on ID

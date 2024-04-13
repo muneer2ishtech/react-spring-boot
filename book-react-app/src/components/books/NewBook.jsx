@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 
 const NewBook = () => {
@@ -10,13 +10,14 @@ const NewBook = () => {
         price: ''
     });
 
-    const history = useHistory();
+    const history = createBrowserHistory();
 
     const handleSave = () => {
         axios.post('sprinbooturl/api/books', book)
             .then(response => {
                 console.log('Book added successfully:', response.data);
-                history.push('/books'); // Redirect to list of books
+                 // Redirect to list of books
+                history.push('/books');
             })
             .catch(error => {
                 console.error('Error adding book:', error);
@@ -24,7 +25,8 @@ const NewBook = () => {
     };
 
     const handleCancel = () => {
-        history.push('/books'); // Redirect to list of books
+         // Redirect to list of books
+        history.push('/books');
     };
 
     const handleReset = () => {

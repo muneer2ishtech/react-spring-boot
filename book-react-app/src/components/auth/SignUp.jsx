@@ -1,11 +1,10 @@
-// components/auth/Signup.jsx
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 
 const Signup = () => {
     const [user, setUser] = useState({ username: '', email: '', password: '' });
-    const history = useHistory();
+    const history = createBrowserHistory();
 
     const handleChange = (e) => {
         const { name, value } = e.target;

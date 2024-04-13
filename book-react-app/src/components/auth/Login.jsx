@@ -1,11 +1,10 @@
-// components/auth/Login.jsx
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 
 const Login = () => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
-    const history = useHistory();
+    const history = createBrowserHistory();
 
     const handleChange = (e) => {
         const { name, value } = e.target;

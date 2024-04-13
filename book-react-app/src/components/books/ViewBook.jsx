@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 
 const ViewBook = ({ match }) => {
     const { id } = match.params;
     const [book, setBook] = useState({});
-    const history = useHistory();
+    const history = createBrowserHistory();
 
     useEffect(() => {
         axios.get(`sprinbooturl/api/books/${id}`)
