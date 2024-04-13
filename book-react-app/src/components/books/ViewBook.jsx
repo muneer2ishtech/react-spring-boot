@@ -21,7 +21,8 @@ const ViewBook = ({ match }) => {
         axios.delete(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
             .then(response => {
                 console.log('Book deleted successfully:', response.data);
-                history.push('/books'); // Redirect to list of books
+                // Redirect to list of books
+                history.push('/books');
             })
             .catch(error => {
                 console.error('Error deleting book:', error);
