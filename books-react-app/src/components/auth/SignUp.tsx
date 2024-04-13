@@ -1,52 +1,61 @@
 import React, { useState } from 'react';
-import { createBrowserHistory } from 'history';
 import axios from 'axios';
+import { SignUpFormData } from '../../interfaces';
 
-const Signup = () => {
-    const [user, setUser] = useState({ username: '', email: '', password: '' });
-    const history = createBrowserHistory();
+const SignUp: React.FC = () => {
+    const [formData, setFormData] = useState < SignUpFormData > ({
+        username: '',
+        password: '',
+        repeatPassword: ''
+    });
+    const [error, setError] = useState('');
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUser(prevState => ({
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (formData.password !== formData.repeatPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+        axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, formData)
+            .then(response => {
+                console.log('Signed up successfully:', response.data);
+                // Redirect or handle success as needed
+            })
+            .catch(error => {
+                console.error('Error signing up:', error);
+                setError('Error signing up. Please try again later.');
+            });
+    };
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setFormData(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, user)
-            .then(response => {
-                console.log('Signup successful:', response.data);
-                // Redirect to login page upon successful signup
-                history.push('/login');
-            })
-            .catch(error => {
-                console.error('Error signing up:', error);
-            });
-    };
-
     return (
         <div>
-            <h2>Signup</h2>
+            <h2>Sign Up</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username:</label>
-                    <input type="text" name="username" value={user.username} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" name="email" value={user.email} onChange={handleChange} />
+                    <label>Username (Email):</label>
+                    <input type="email" name="username" value={formData.username} onChange={handleChange} required />
                 </div>
                 <div>
                     <label>Password:</label>
-                    <input type="password" name="password" value={user.password} onChange={handleChange} />
+                    <input type="password" name="password" value={formData.password} onChange={handleChange} required />
                 </div>
-                <button type="submit">Signup</button>
+                <div>
+                    <label>Repeat Password:</label>
+                    <input type="password" name="repeatPassword" value={formData.repeatPassword} onChange={handleChange} required />
+                </div>
+                {error && <div>{error}</div>}
+                <button type="submit">Sign Up</button>
             </form>
         </div>
     );
 };
 
-export default Signup;
+export default SignUp;

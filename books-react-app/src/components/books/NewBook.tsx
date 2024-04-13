@@ -1,75 +1,74 @@
 import React, { useState } from 'react';
-import { createBrowserHistory } from 'history';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { Book } from '../../interfaces';
 
-const NewBook = () => {
-    const [book, setBook] = useState({
-        id: '',
+const NewBook: React.FC = () => {
+    const history = useHistory();
+    const [book, setBook] = useState < Book > ({
+        id: 0,
         name: '',
         author: '',
-        price: ''
+        price: 0
     });
-
-    const history = createBrowserHistory();
 
     const handleSave = () => {
         axios.post(`${process.env.REACT_APP_API_URL}/api/books`, book)
-            .then(response => {
-                console.log('Book added successfully:', response.data);
-                 // Redirect to list of books
+            .then(() => {
                 history.push('/books');
             })
             .catch(error => {
-                console.error('Error adding book:', error);
+                console.error('Error adding new book:', error);
             });
     };
 
     const handleCancel = () => {
-         // Redirect to list of books
         history.push('/books');
     };
 
     const handleReset = () => {
         setBook({
-            id: '',
+            id: 0,
             name: '',
             author: '',
-            price: ''
+            price: 0
         });
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setBook(prevState => ({
-            ...prevState,
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setBook(prevBook => ({
+            ...prevBook,
             [name]: value
         }));
     };
 
     return (
         <div>
-            <h2>Add Book</h2>
-            <form>
-                <div>
-                    <label>ID:</label>
-                    <input type="text" name="id" value={book.id} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Name:</label>
-                    <input type="text" name="name" value={book.name} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Author:</label>
-                    <input type="text" name="author" value={book.author} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Price:</label>
-                    <input type="text" name="price" value={book.price} onChange={handleChange} />
-                </div>
-                <button type="button" onClick={handleReset}>Reset</button>
-                <button type="button" onClick={handleCancel}>Cancel</button>
-                <button type="button" onClick={handleSave}>Save</button>
-            </form>
+            <h2>Add New Book</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td><input type="text" name="id" value={book.id} readOnly /></td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" name="name" value={book.name} onChange={handleChange} /></td>
+                    </tr>
+                    <tr>
+                        <td>Author:</td>
+                        <td><input type="text" name="author" value={book.author} onChange={handleChange} /></td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td><input type="number" name="price" value={book.price} onChange={handleChange} /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button onClick={handleReset}>Reset</button>
+            <button onClick={handleSave}>Save</button>
+            <button onClick={handleCancel}>Cancel</button>
         </div>
     );
 };

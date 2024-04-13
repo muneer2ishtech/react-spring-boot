@@ -1,24 +1,19 @@
 import React from 'react';
-import { createBrowserHistory } from 'history';
+import { useHistory } from 'react-router-dom';
 
-const Logout = () => {
-    const history = createBrowserHistory();
+const SignOut: React.FC = () => {
+  const history = useHistory();
 
-    const handleLogout = () => {
-        // Clear authentication tokens from local storage or session storage
-        localStorage.removeItem('authToken');
+  const handleSignOut = () => {
+    // Perform logout logic here (e.g., clearing authentication tokens, etc.)
+    // Redirect to desired page after sign out
+  };
 
-        // Redirect to the login page after logout
-        history.push('/login');
-    };
-
-    return (
-        <div>
-            <h2>Logout</h2>
-            <p>Are you sure you want to logout?</p>
-            <button onClick={handleLogout}>Logout</button>
-        </div>
-    );
+  return (
+    <div>
+      <button onClick={handleSignOut}>Sign Out</button>
+    </div>
+  );
 };
 
-export default Logout;
+export default SignOut;
