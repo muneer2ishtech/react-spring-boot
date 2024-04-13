@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { createBrowserHistory } from 'history';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Book } from '../../interfaces';
 
-const EditBook = ({ match }) => {
-    const { id } = match.params;
-    const [book, setBook] = useState({});
-    const [originalBook] = useState({});
-    const history = createBrowserHistory();
+const EditBook: React.FC = () => {
+    const { id } = useParams < { id: string } > ();
+    const history = useHistory();
+    const [book, setBook] = useState < Book | null > (null);
+    const [originalBook, setOriginalBook] = useState < Book | null > (null);
 
     useEffect(() => {
-        // Fetch book data from API based on ID
-        axios.get(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
+        axios.get < Book > (`${process.env.REACT_APP_API_URL}/api/books/${id}`)
             .then(response => {
                 setBook(response.data);
+                setOriginalBook(response.data);
             })
             .catch(error => {
                 console.error('Error fetching book:', error);
@@ -23,30 +24,31 @@ const EditBook = ({ match }) => {
         setBook(originalBook);
     };
 
-    const handleCancel = () => {
-        // Redirect back to ViewBook
-        history.push(`/books/${id}`);
-    };
-
     const handleSave = () => {
-        // Send PUT request to update book data
         axios.put(`${process.env.REACT_APP_API_URL}/api/books/${id}`, book)
-            .then(response => {
-                console.log('Book updated successfully:', response.data);
-                // Redirect back to ViewBook
+            .then(() => {
+                history.push(`/books/${id}`);
             })
             .catch(error => {
                 console.error('Error updating book:', error);
             });
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setBook(prevState => ({
-            ...prevState,
+    const handleCancel = () => {
+        history.push(`/books/${id}`);
+    };
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setBook(prevBook => ({
+            ...prevBook,
             [name]: value
         }));
     };
+
+    if (!book) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div>
@@ -54,26 +56,26 @@ const EditBook = ({ match }) => {
             <table>
                 <tbody>
                     <tr>
-                        <td>ID</td>
-                        <td><input type="text" name="id" value={book.id} onChange={handleChange} /></td>
+                        <td>ID:</td>
+                        <td><input type="text" name="id" value={book.id} readOnly /></td>
                     </tr>
                     <tr>
-                        <td>Name</td>
+                        <td>Name:</td>
                         <td><input type="text" name="name" value={book.name} onChange={handleChange} /></td>
                     </tr>
                     <tr>
-                        <td>Author</td>
+                        <td>Author:</td>
                         <td><input type="text" name="author" value={book.author} onChange={handleChange} /></td>
                     </tr>
                     <tr>
-                        <td>Price</td>
-                        <td><input type="text" name="price" value={book.price} onChange={handleChange} /></td>
+                        <td>Price:</td>
+                        <td><input type="number" name="price" value={book.price} onChange={handleChange} /></td>
                     </tr>
                 </tbody>
             </table>
             <button onClick={handleReset}>Reset</button>
-            <button onClick={handleCancel}>Cancel</button>
             <button onClick={handleSave}>Save</button>
+            <button onClick={handleCancel}>Cancel</button>
         </div>
     );
 };

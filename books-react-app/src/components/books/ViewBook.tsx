@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { createBrowserHistory } from 'history';
-import axios from 'axios';
+// components/books/ViewBook.tsx
 
-const ViewBook = ({ match }) => {
-    const { id } = match.params;
-    const [book, setBook] = useState({});
-    const history = createBrowserHistory();
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Book } from '../../interfaces';
+
+const ViewBook: React.FC = () => {
+    const { id } = useParams < { id: string } > ();
+    const history = useHistory();
+    const [book, setBook] = useState < Book | null > (null);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
+        axios.get < Book > (`${process.env.REACT_APP_API_URL}/api/books/${id}`)
             .then(response => {
                 setBook(response.data);
             })
@@ -17,11 +20,13 @@ const ViewBook = ({ match }) => {
             });
     }, [id]);
 
+    const handleEdit = () => {
+        history.push(`/books/${id}/edit`);
+    };
+
     const handleDelete = () => {
         axios.delete(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
-            .then(response => {
-                console.log('Book deleted successfully:', response.data);
-                // Redirect to list of books
+            .then(() => {
                 history.push('/books');
             })
             .catch(error => {
@@ -29,13 +34,13 @@ const ViewBook = ({ match }) => {
             });
     };
 
-    const handleBackToList = () => {
+    const handleList = () => {
         history.push('/books');
     };
 
-    const handleEditBook = () => {
-        history.push(`/books/${id}/edit`);
-    };
+    if (!book) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div>
@@ -43,26 +48,26 @@ const ViewBook = ({ match }) => {
             <table>
                 <tbody>
                     <tr>
-                        <td>ID</td>
+                        <td>ID:</td>
                         <td>{book.id}</td>
                     </tr>
                     <tr>
-                        <td>Name</td>
+                        <td>Name:</td>
                         <td>{book.name}</td>
                     </tr>
                     <tr>
-                        <td>Author</td>
+                        <td>Author:</td>
                         <td>{book.author}</td>
                     </tr>
                     <tr>
-                        <td>Price</td>
+                        <td>Price:</td>
                         <td>{book.price}</td>
                     </tr>
                 </tbody>
             </table>
+            <button onClick={handleEdit}>Edit</button>
             <button onClick={handleDelete}>Delete</button>
-            <button onClick={handleEditBook}>Edit Book</button>
-            <button onClick={handleBackToList}>Back to Book List</button>
+            <button onClick={handleList}>List</button>
         </div>
     );
 };

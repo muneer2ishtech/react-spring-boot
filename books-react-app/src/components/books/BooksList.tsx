@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Book } from '../../interfaces';
 
-const BookList = () => {
-    const [books, setBooks] = useState([]);
+const BooksList: React.FC = () => {
+    const [books, setBooks] = useState < Book[] > ([]);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/books`)
+        axios.get < Book[] > (`${process.env.REACT_APP_API_URL}/api/books`)
             .then(response => {
                 setBooks(response.data);
             })
@@ -15,12 +16,10 @@ const BookList = () => {
             });
     }, []);
 
-    const handleDelete = (id) => {
+    const deleteBook = (id: number) => {
         axios.delete(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
-            .then(response => {
-                console.log('Book deleted successfully:', response.data);
-                // Refresh the book list after deletion
-                setBooks(books.filter(book => book.id !== id));
+            .then(() => {
+                setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
             })
             .catch(error => {
                 console.error('Error deleting book:', error);
@@ -29,7 +28,7 @@ const BookList = () => {
 
     return (
         <div>
-            <h2>Book List</h2>
+            <h2>Books List</h2>
             <Link to="/books/new">Add New Book</Link>
             <table>
                 <thead>
@@ -51,7 +50,7 @@ const BookList = () => {
                             <td>
                                 <Link to={`/books/${book.id}`}>View</Link>{' '}
                                 <Link to={`/books/${book.id}/edit`}>Edit</Link>{' '}
-                                <button onClick={() => handleDelete(book.id)}>Delete</button>
+                                <button onClick={() => deleteBook(book.id)}>Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -61,4 +60,4 @@ const BookList = () => {
     );
 };
 
-export default BookList;
+export default BooksList;
