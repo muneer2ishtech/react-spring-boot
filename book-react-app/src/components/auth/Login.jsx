@@ -16,7 +16,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('sprinbooturl/api/login', credentials)
+        axios.post(`${process.env.REACT_APP_API_URL}/api/login`, credentials)
             .then(response => {
                 console.log('Login successful:', response.data);
                 // Redirect to desired page upon successful login

@@ -16,7 +16,7 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('sprinbooturl/api/signup', user)
+        axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, user)
             .then(response => {
                 console.log('Signup successful:', response.data);
                 // Redirect to login page upon successful signup

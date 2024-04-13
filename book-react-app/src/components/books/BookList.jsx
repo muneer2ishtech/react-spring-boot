@@ -6,7 +6,7 @@ const BookList = () => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        axios.get('sprinbooturl/api/books')
+        axios.get(`${process.env.REACT_APP_API_URL}/api/books`)
             .then(response => {
                 setBooks(response.data);
             })
@@ -16,7 +16,7 @@ const BookList = () => {
     }, []);
 
     const handleDelete = (id) => {
-        axios.delete(`sprinbooturl/api/books/${id}`)
+        axios.delete(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
             .then(response => {
                 console.log('Book deleted successfully:', response.data);
                 // Refresh the book list after deletion

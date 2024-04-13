@@ -8,7 +8,7 @@ const ViewBook = ({ match }) => {
     const history = createBrowserHistory();
 
     useEffect(() => {
-        axios.get(`sprinbooturl/api/books/${id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
             .then(response => {
                 setBook(response.data);
             })
@@ -18,7 +18,7 @@ const ViewBook = ({ match }) => {
     }, [id]);
 
     const handleDelete = () => {
-        axios.delete(`sprinbooturl/api/books/${id}`)
+        axios.delete(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
             .then(response => {
                 console.log('Book deleted successfully:', response.data);
                 history.push('/books'); // Redirect to list of books

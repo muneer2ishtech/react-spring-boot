@@ -10,7 +10,7 @@ const EditBook = ({ match }) => {
 
     useEffect(() => {
         // Fetch book data from API based on ID
-        axios.get(`sprinbooturl/api/books/${id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
             .then(response => {
                 setBook(response.data);
             })
@@ -30,7 +30,7 @@ const EditBook = ({ match }) => {
 
     const handleSave = () => {
         // Send PUT request to update book data
-        axios.put(`sprinbooturl/api/books/${id}`, book)
+        axios.put(`${process.env.REACT_APP_API_URL}/api/books/${id}`, book)
             .then(response => {
                 console.log('Book updated successfully:', response.data);
                 // Redirect back to ViewBook

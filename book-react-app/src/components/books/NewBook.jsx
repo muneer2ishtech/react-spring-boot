@@ -13,7 +13,7 @@ const NewBook = () => {
     const history = createBrowserHistory();
 
     const handleSave = () => {
-        axios.post('sprinbooturl/api/books', book)
+        axios.post(`${process.env.REACT_APP_API_URL}/api/books`, book)
             .then(response => {
                 console.log('Book added successfully:', response.data);
                  // Redirect to list of books
