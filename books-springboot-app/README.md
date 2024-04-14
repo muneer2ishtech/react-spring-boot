@@ -90,3 +90,6 @@ create table t_book (
 
 - [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 - [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+## References
+[Spring-Boot reference](./HELP.md)
