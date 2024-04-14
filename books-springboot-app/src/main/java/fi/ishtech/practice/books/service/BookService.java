@@ -17,7 +17,7 @@ public interface BookService {
 
 	BookVo findByIdAndMapToVo(Long id);
 
-	Book create(Book book);
+	BookVo createNew(BookVo bookVo);
 
 	BookVo findAndUpdate(BookVo bookVo);
 

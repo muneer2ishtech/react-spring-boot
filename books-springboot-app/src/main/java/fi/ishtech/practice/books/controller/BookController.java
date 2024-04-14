@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import fi.ishtech.practice.books.entity.Book;
 import fi.ishtech.practice.books.payload.BookVo;
 import fi.ishtech.practice.books.service.BookService;
 import fi.ishtech.practice.books.spec.BookSpec;
@@ -60,15 +59,19 @@ public class BookController {
 	}
 
 	@PostMapping("/api/v1/books")
-	public ResponseEntity<?> createNew(@Valid @RequestBody Book book) {
+	public ResponseEntity<Long> createNew(@Valid @RequestBody BookVo book) {
 		log.debug("Creating new Book {}", book.getTitle());
 
-		book = bookService.create(book);
+		BookVo bookVo = bookService.createNew(book);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/books/{bookId}")
-				.buildAndExpand(book.getId()).toUri();
+		// @formatter:off
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path("/api/v1/books/{bookId}")
+				.buildAndExpand(bookVo.getId())
+				.toUri();
+		// @formatter:on
 
-		return ResponseEntity.created(uri).body(book.getId());
+		return ResponseEntity.created(uri).body(bookVo.getId());
 	}
 
 	@DeleteMapping("/api/v1/books/{id}")

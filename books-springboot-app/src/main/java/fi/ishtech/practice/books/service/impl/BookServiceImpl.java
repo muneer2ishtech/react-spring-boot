@@ -57,9 +57,13 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book create(Book book) {
+	public BookVo createNew(BookVo bookVo) {
+		Assert.isNull(bookVo.getId(), "Cannot set id for new Book");
+		return bookMapper.toVo(this.create(bookMapper.toNewEntity(bookVo)));
+	}
+
+	private Book create(Book book) {
 		Assert.isNull(book.getId(), "Cannot set id for new Book");
-		Assert.hasText(book.getTitle(), "Title is mandatory");
 
 		book = bookRepo.saveAndFlush(book);
 		log.info("New Book({}) created for title: {}", book.getId(), book.getTitle());
