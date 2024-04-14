@@ -1,5 +1,7 @@
 package fi.ishtech.practice.books.controller;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
@@ -24,6 +26,13 @@ public class CustomExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.body(ErrorResponse.create(ex, HttpStatus.BAD_REQUEST, ex.getMessage()));
+	}
+
+	@ExceptionHandler(NoSuchElementException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<ErrorResponse> handleNoSuchElementException(NoSuchElementException ex) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(ErrorResponse.create(ex, HttpStatus.NOT_FOUND, ex.getMessage()));
 	}
 
 }

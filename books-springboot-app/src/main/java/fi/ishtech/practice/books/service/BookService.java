@@ -1,7 +1,5 @@
 package fi.ishtech.practice.books.service;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,7 +15,7 @@ public interface BookService {
 
 	Page<BookVo> findAllAndMapToVo(Specification<Book> spec, Pageable pageable);
 
-	Optional<Book> findById(Long id);
+	BookVo findByIdAndMapToVo(Long id);
 
 	Book create(Book book);
 

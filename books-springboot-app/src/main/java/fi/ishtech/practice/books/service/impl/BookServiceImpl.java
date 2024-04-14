@@ -46,9 +46,13 @@ public class BookServiceImpl implements BookService {
 		return this.findAll(spec, pageable).map(bookMapper::toVo);
 	}
 
-	@Override
-	public Optional<Book> findById(Long id) {
+	private Optional<Book> findById(Long id) {
 		return bookRepo.findById(id);
+	}
+
+	@Override
+	public BookVo findByIdAndMapToVo(Long id) {
+		return this.findById(id).map(book -> bookMapper.toVo(book)).orElseThrow();
 	}
 
 	@Override

@@ -55,8 +55,8 @@ public class BookController {
 	// @formatter:on
 
 	@GetMapping("/api/v1/books/{id}")
-	public ResponseEntity<Book> findById(@PathVariable Long id) {
-		return ResponseEntity.of(bookService.findById(id));
+	public ResponseEntity<BookVo> findById(@PathVariable Long id) {
+		return ResponseEntity.ok(bookService.findByIdAndMapToVo(id));
 	}
 
 	@PostMapping("/api/v1/books")
