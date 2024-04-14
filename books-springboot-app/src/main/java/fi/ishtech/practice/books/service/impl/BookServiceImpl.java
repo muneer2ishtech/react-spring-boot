@@ -1,15 +1,19 @@
 package fi.ishtech.practice.books.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import fi.ishtech.practice.books.BookMapper;
 import fi.ishtech.practice.books.entity.Book;
+import fi.ishtech.practice.books.payload.BookVo;
 import fi.ishtech.practice.books.repo.BookRepo;
 import fi.ishtech.practice.books.service.BookService;
 import jakarta.persistence.EntityManager;
@@ -30,9 +34,16 @@ public class BookServiceImpl implements BookService {
 	@Autowired
 	private EntityManager entityManager;
 
+	@Autowired
+	private BookMapper bookMapper;
+
+	private Page<Book> findAll(Specification<Book> spec, Pageable pageable) {
+		return bookRepo.findAll(spec, pageable);
+	}
+
 	@Override
-	public List<Book> findAll() {
-		return bookRepo.findAll();
+	public Page<BookVo> findAllAndMapToVo(Specification<Book> spec, Pageable pageable) {
+		return this.findAll(spec, pageable).map(bookMapper::toVo);
 	}
 
 	@Override

@@ -31,3 +31,11 @@ create table t_book (
   primary key (id)
 )
 ```
+
+## APIs
+
+- To use pagination and sorting by multiple attributes
+
+    ```
+    /api/v1/books?page=3&size=8&sort=price,desc&sort=title,asc
+    ```
