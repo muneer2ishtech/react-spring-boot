@@ -39,3 +39,8 @@ create table t_book (
     ```
     /api/v1/books?page=3&size=8&sort=price,desc&sort=title,asc
     ```
+
+### Swagger
+
+- [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
