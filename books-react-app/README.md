@@ -44,4 +44,4 @@
     `npx tsc --init`
 
 ## References
-[React reference](./react.md)
+[React reference](./HELP.md)
