@@ -1,5 +1,6 @@
 package fi.ishtech.practice.books.service.impl;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,11 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void deleteById(Long id) {
-		bookRepo.deleteById(id);
+		if (bookRepo.existsById(id)) {
+			bookRepo.deleteById(id);
+		} else {
+			throw new NoSuchElementException("No Book exists with id " + id);
+		}
 		log.info("Deleted Book({})", id);
 	}
 
