@@ -81,12 +81,10 @@ public class BookController {
 	}
 
 	@PutMapping("/api/v1/books")
-	public ResponseEntity<?> update(@Valid @RequestBody Book book) {
+	public ResponseEntity<BookVo> update(@Valid @RequestBody BookVo book) {
 		log.debug("Updating Book({})", book.getId());
 
-		book = bookService.update(book);
-
-		return ResponseEntity.ok(book);
+		return ResponseEntity.ok(bookService.findAndUpdate(book));
 	}
 
 }

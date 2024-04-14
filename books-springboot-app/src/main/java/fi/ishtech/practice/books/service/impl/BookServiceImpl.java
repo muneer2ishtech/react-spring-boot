@@ -68,7 +68,19 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public Book update(Book book) {
+	public BookVo findAndUpdate(BookVo bookVo) {
+		Assert.notNull(bookVo.getId(), "Book id is mandatory to find and update details");
+
+		// @formatter:off
+		return bookMapper.toVo(
+				this.update(
+						bookRepo.findById(bookVo.getId())
+							.map(book -> bookMapper.toExistingEntity(bookVo, book))
+							.orElseThrow()));
+		// @formatter:on
+	}
+
+	private Book update(Book book) {
 		Assert.notNull(book.getId(), "Book id is mandatory to find and update details");
 
 		book = bookRepo.saveAndFlush(book);

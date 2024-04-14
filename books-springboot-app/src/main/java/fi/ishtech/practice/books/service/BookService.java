@@ -19,7 +19,7 @@ public interface BookService {
 
 	Book create(Book book);
 
-	Book update(Book book);
+	BookVo findAndUpdate(BookVo bookVo);
 
 	void deleteById(Long id);
 
