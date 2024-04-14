@@ -5,12 +5,58 @@
 - spring-boot - 3.2.4
 - Apache Maven - 3.9.6
 
-## Run on local
+## Execution
+
+### Run on local
+
 - To run with dev profile
 
 ```
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
+
+### Docker
+
+### Docker build
+
+```
+docker build -f Dockerfile . -t muneer2ishtech/books-springboot-app:0.1.0
+```
+
+### Docker run
+
+- To run in interactive mode
+
+```
+docker run -it \
+ -e SPRING_PROFILES_ACTIVE=dev \
+ -p 8080:8080 \
+ muneer2ishtech/books-springboot-app:0.1.0
+```
+
+- To run in detached mode
+
+```
+docker run -d \
+ -e SPRING_PROFILES_ACTIVE=dev \
+ -p 8080:8080 \
+ muneer2ishtech/books-springboot-app:0.1.0
+```
+
+- You can add container name for easy find using below option
+
+    `--name books-springboot-app-container`
+
+- To find the container
+
+    `docker ps -a --filter "ancestor=muneer2ishtech/books-springboot-app:0.1.0"`
+
+    `docker ps -a --filter "name=books-springboot-app-container`
+
+- To tail console logs
+
+    `docker logs -f TODO_CONTAINER_ID_OR_NAME`
+
 
 ## DB
 
