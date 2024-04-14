@@ -67,7 +67,7 @@ public class BookControllerTest {
  		mvc.perform(get("/api/v1/books")
  				.contentType(MediaType.APPLICATION_JSON))
  			.andExpect(status().isOk())
-			.andExpect(jsonPath("$[0].title", is("Intro to Java")));
+			.andExpect(jsonPath("$.content.[0].title", is("Intro to Java")));
 		// @formatter:on
 	}
 
