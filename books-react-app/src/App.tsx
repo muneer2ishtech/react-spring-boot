@@ -9,17 +9,21 @@ import EditBook from './components/books/EditBook';
 
 const App: React.FC = () => (
   <Router>
-    <SideNav />
-    <Routes>
-      <Route path="/" element={<Navigate to="/books" />} />
+    <div className="App">
+      <SideNav />
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Navigate to="/books" />} />
 
-      <Route path="/books" element={<BooksList />} />
-      <Route path="/books/new" element={<NewBook />} />
-      <Route path="/books/:id" element={<ViewBook />} />
-      <Route path="/books/:id/edit" element={<EditBook />} />
+          <Route path="/books" element={<BooksList />} />
+          <Route path="/books/new" element={<NewBook />} />
+          <Route path="/books/:id" element={<ViewBook />} />
+          <Route path="/books/:id/edit" element={<EditBook />} />
 
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+    </div>
   </Router>
 );
 
