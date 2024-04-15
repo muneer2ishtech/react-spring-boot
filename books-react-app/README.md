@@ -1,5 +1,10 @@
 # books-react-app
 
+## Versions
+- Node - v20.11.0
+- NPM - 10.5.2
+- React - 18.2.0
+
 ## Environment
 
 - Add following to `.env.local` file
