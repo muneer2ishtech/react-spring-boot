@@ -17,7 +17,10 @@ const SideNav: React.FC = () => {
             <div className="toggle-btn" onClick={toggleNav}>
                 {isNavOpen ? <MenuOpenIcon /> : <MenuIcon />}
             </div>
-            <Link to="/books"><BookIcon /> Books</Link>
+            <Link to="/books">
+                <BookIcon />
+                {isNavOpen && <span>Books</span>}
+            </Link>
         </div>
     );
 };
