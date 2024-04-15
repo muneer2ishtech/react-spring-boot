@@ -35,3 +35,7 @@
 .sidenav a:hover {
     background-color: #555;
 }
+
+.sidemenu-text {
+    margin-left: 0.5em;
+}

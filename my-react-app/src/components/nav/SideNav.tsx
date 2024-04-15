@@ -19,7 +19,7 @@ const SideNav: React.FC = () => {
             </div>
             <Link to="/books">
                 <BookIcon />
-                {isNavOpen && <span>Books</span>}
+                {isNavOpen && <span className = "sidemenu-text">Books</span>}
             </Link>
         </div>
     );
