@@ -34,8 +34,9 @@ const BooksList: React.FC = () => {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Title</th>
                         <th>Author</th>
+                        <th>Year</th>
                         <th>Price</th>
                         <th>Actions</th>
                     </tr>
@@ -44,8 +45,9 @@ const BooksList: React.FC = () => {
                     {books.map(book => (
                         <tr key={book.id}>
                             <td>{book.id}</td>
-                            <td>{book.name}</td>
+                            <td>{book.title}</td>
                             <td>{book.author}</td>
+                            <td>{book.year}</td>
                             <td>{book.price}</td>
                             <td>
                                 <Link to={`/books/${book.id}`}>View</Link>{' '}

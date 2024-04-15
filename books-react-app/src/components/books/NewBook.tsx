@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 import { Book } from '../../interfaces';
 
 const NewBook: React.FC = () => {
-    const history = useHistory();
+    const history = createBrowserHistory();
     const [book, setBook] = useState < Book > ({
-        id: 0,
-        name: '',
+        id: null,
+        title: '',
         author: '',
+        year: 0,
         price: 0
     });
 
@@ -28,9 +29,10 @@ const NewBook: React.FC = () => {
 
     const handleReset = () => {
         setBook({
-            id: 0,
-            name: '',
+            id: null,
+            title: '',
             author: '',
+            year: 0,
             price: 0
         });
     };
@@ -38,7 +40,7 @@ const NewBook: React.FC = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setBook(prevBook => ({
-            ...prevBook,
+            ...prevBook!,
             [name]: value
         }));
     };
@@ -49,19 +51,19 @@ const NewBook: React.FC = () => {
             <table>
                 <tbody>
                     <tr>
-                        <td>ID:</td>
-                        <td><input type="text" name="id" value={book.id} readOnly /></td>
+                        <td>Title</td>
+                        <td><input type="text" name="title" value={book.title} onChange={handleChange} /></td>
                     </tr>
                     <tr>
-                        <td>Name:</td>
-                        <td><input type="text" name="name" value={book.name} onChange={handleChange} /></td>
-                    </tr>
-                    <tr>
-                        <td>Author:</td>
+                        <td>Author</td>
                         <td><input type="text" name="author" value={book.author} onChange={handleChange} /></td>
                     </tr>
                     <tr>
-                        <td>Price:</td>
+                        <td>Year</td>
+                        <td><input type="number" name="year" value={book.year} onChange={handleChange} /></td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
                         <td><input type="number" name="price" value={book.price} onChange={handleChange} /></td>
                     </tr>
                 </tbody>

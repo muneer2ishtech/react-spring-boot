@@ -1,13 +1,14 @@
 // components/books/ViewBook.tsx
 
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 import { Book } from '../../interfaces';
 
 const ViewBook: React.FC = () => {
     const { id } = useParams < { id: string } > ();
-    const history = useHistory();
+    const history = createBrowserHistory();
     const [book, setBook] = useState < Book | null > (null);
 
     useEffect(() => {
@@ -48,19 +49,23 @@ const ViewBook: React.FC = () => {
             <table>
                 <tbody>
                     <tr>
-                        <td>ID:</td>
+                        <td>ID</td>
                         <td>{book.id}</td>
                     </tr>
                     <tr>
-                        <td>Name:</td>
-                        <td>{book.name}</td>
+                        <td>Title</td>
+                        <td>{book.title}</td>
                     </tr>
                     <tr>
-                        <td>Author:</td>
+                        <td>Author</td>
                         <td>{book.author}</td>
                     </tr>
                     <tr>
-                        <td>Price:</td>
+                        <td>Year</td>
+                        <td>{book.year}</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
                         <td>{book.price}</td>
                     </tr>
                 </tbody>
