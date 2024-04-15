@@ -7,7 +7,7 @@ const BooksList: React.FC = () => {
     const [books, setBooks] = useState < Book[] > ([]);
 
     useEffect(() => {
-        axios.get < Book[] > (`${process.env.REACT_APP_API_URL}/api/books`)
+        axios.get < Book[] > (`${process.env.REACT_APP_API_URL}/api/v1/books`)
             .then(response => {
                 setBooks(response.data);
             })
@@ -17,7 +17,7 @@ const BooksList: React.FC = () => {
     }, []);
 
     const deleteBook = (id: number) => {
-        axios.delete(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
+        axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(() => {
                 setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
             })

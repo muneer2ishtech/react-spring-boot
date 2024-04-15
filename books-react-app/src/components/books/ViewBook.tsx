@@ -12,7 +12,7 @@ const ViewBook: React.FC = () => {
     const [book, setBook] = useState < Book | null > (null);
 
     useEffect(() => {
-        axios.get < Book > (`${process.env.REACT_APP_API_URL}/api/books/${id}`)
+        axios.get < Book > (`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(response => {
                 setBook(response.data);
             })
@@ -26,7 +26,7 @@ const ViewBook: React.FC = () => {
     };
 
     const handleDelete = () => {
-        axios.delete(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
+        axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(() => {
                 history.push('/books');
             })
