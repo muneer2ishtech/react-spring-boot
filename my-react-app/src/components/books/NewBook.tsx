@@ -14,7 +14,7 @@ const NewBook: React.FC = () => {
     });
 
     const handleSave = () => {
-        axios.post(`${process.env.REACT_APP_API_URL}/api/books`, book)
+        axios.post(`${process.env.REACT_APP_API_URL}/api/v1/books`, book)
             .then(() => {
                 history.push('/books');
             })

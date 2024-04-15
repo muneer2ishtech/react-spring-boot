@@ -11,7 +11,7 @@ const EditBook: React.FC = () => {
     const [originalBook, setOriginalBook] = useState<Book | null>(null);
 
     useEffect(() => {
-        axios.get<Book>(`${process.env.REACT_APP_API_URL}/api/books/${id}`)
+        axios.get<Book>(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(response => {
                 setBook(response.data);
                 setOriginalBook(response.data);
@@ -29,7 +29,7 @@ const EditBook: React.FC = () => {
 
     const handleSave = () => {
         if (book) {
-            axios.put(`${process.env.REACT_APP_API_URL}/api/books/${id}`, book)
+            axios.put(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`, book)
                 .then(() => {
                     history.push(`/books/${id}`);
                 })
