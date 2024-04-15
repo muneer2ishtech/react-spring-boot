@@ -21,5 +21,5 @@ docker exec -it books-node-container bash
 - Go to code folder
 
 ```
-cd ~/react-spring-boot/book-react-app/
+cd ~/react-spring-boot/books-react-app/
 ```
