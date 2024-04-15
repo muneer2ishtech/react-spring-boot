@@ -11,7 +11,8 @@ export interface SignInFormData {
 
 export interface Book {
     id: number;
-    name: string;
+    title: string;
     author: string;
+    year: number;
     price: number;
 }
