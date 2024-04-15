@@ -7,9 +7,9 @@ const BooksList: React.FC = () => {
     const [books, setBooks] = useState < Book[] > ([]);
 
     useEffect(() => {
-        axios.get < Book[] > (`${process.env.REACT_APP_API_URL}/api/v1/books`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/v1/books`)
             .then(response => {
-                setBooks(response.data);
+                setBooks(response.data?.content);
             })
             .catch(error => {
                 console.error('Error fetching books:', error);
