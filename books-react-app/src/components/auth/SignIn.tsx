@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import axios from 'axios';
 
 const SignIn: React.FC = () => {
-  const history = useHistory();
+  const history = createBrowserHistory();
   const [credentials, setCredentials] = useState({ username: '', password: '' });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

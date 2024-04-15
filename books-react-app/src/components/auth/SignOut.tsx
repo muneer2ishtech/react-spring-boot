@@ -1,8 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 const SignOut: React.FC = () => {
-  const history = useHistory();
+  const history = createBrowserHistory();
 
   const handleSignOut = () => {
     // Perform logout logic here (e.g., clearing authentication tokens, etc.)
