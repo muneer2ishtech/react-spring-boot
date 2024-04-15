@@ -25,7 +25,7 @@ export interface Book {
     price: number;
 }
 
-interface Page<T> {
+export interface Page<T> {
     content: T[];
     pageable: {
         sort: {

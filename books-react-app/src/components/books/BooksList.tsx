@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Book } from '../../interfaces';
+import { Book, Page } from '../../interfaces';
 
 const BooksList: React.FC = () => {
     const [books, setBooks] = useState < Book[] > ([]);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/v1/books`)
+        axios.get <Page <Book>> (`${process.env.REACT_APP_API_URL}/api/v1/books`)
             .then(response => {
                 setBooks(response.data?.content);
             })
