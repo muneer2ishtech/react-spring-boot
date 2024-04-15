@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
-import { Book } from '../../interfaces';
+import { NewBook as Book } from '../../interfaces';
 
 const NewBook: React.FC = () => {
     const history = createBrowserHistory();
