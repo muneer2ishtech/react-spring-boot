@@ -40,10 +40,10 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ onConfirm, confirmDialog = 
                         <DialogContentText>Are you sure you want to delete?</DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleCancel} color="primary">
+                        <Button onClick={handleCancel} variant="contained" color="warning">
                             {icon ? <RiCloseLine /> : 'Cancel'}
                         </Button>
-                        <Button onClick={handleConfirm} color="secondary" autoFocus>
+                        <Button onClick={handleConfirm} variant="contained" color="error" autoFocus>
                             {icon ? <RiCheckLine /> : 'Confirm'}
                         </Button>
                     </DialogActions>
