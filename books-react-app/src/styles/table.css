@@ -1,0 +1,24 @@
+.list-table-head {
+    background-color: #555;
+}
+
+.list-table-head th {
+    color: white;
+    text-align: center;
+}
+
+.list-table-row-even {
+    background-color: #f2f2f2;
+}
+
+.list-table-row-odd {
+    background-color: #e6e6e6;
+}
+
+.align-right {
+    text-align: right !important;
+}
+
+.align-center {
+    text-align: center !important;
+}

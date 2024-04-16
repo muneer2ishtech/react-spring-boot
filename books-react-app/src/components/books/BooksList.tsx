@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Book, Page } from '../../interfaces';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import '../../styles/table.css';
 
 const BooksList: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
@@ -33,7 +34,7 @@ const BooksList: React.FC = () => {
             <Link to="/books/new">Add New Book</Link>
             <Table>
                 <TableHead>
-                    <TableRow>
+                    <TableRow className="list-table-head">
                         <TableCell>ID</TableCell>
                         <TableCell>Title</TableCell>
                         <TableCell>Author</TableCell>
@@ -43,14 +44,14 @@ const BooksList: React.FC = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {books.map(book => (
-                        <TableRow key={book.id}>
+                    {books.map((book, index) => (
+                        <TableRow key={book.id} className={index % 2 === 0 ? 'list-table-row-even' : 'list-table-row-odd'}>
                             <TableCell>{book.id}</TableCell>
                             <TableCell>{book.title}</TableCell>
                             <TableCell>{book.author}</TableCell>
-                            <TableCell>{book.year}</TableCell>
-                            <TableCell>{book.price}</TableCell>
-                            <TableCell>
+                            <TableCell className='align-right'>{book.year}</TableCell>
+                            <TableCell className='align-right'>{book.price}</TableCell>
+                            <TableCell className='align-center'>
                                 <Link to={`/books/${book.id}`}>View</Link>{' '}
                                 <Link to={`/books/${book.id}/edit`}>Edit</Link>{' '}
                                 <button onClick={() => deleteBook(book.id)}>Delete</button>
