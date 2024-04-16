@@ -56,7 +56,7 @@ const BooksList: React.FC = () => {
                             <TableCell className='align-center'>
                                 <Link to={`/books/${book.id}`}><RiEyeLine /></Link>{' '}
                                 <Link to={`/books/${book.id}/edit`}><RiPencilLine /></Link>{' '}
-                                <DeleteButton onConfirm={() => deleteBook(book.id)} icon />
+                                <DeleteButton onConfirm={() => deleteBook(book.id)} confirmDialog icon />
                             </TableCell>
                         </TableRow>
                     ))}
