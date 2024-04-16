@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Book, Page } from '../../interfaces';
-import { Table, TableHead, TableBody, TableRow, TableCell, Alert } from '@mui/material';
-import { RiEyeLine, RiPencilLine } from 'react-icons/ri';
+import { Table, TableHead, TableBody, TableRow, TableCell, Alert, Button, Box } from '@mui/material';
+import { RiEyeLine, RiPencilLine, RiAddFill } from 'react-icons/ri';
 import DeleteButton from '../common/DeleteButton';
 import '../../styles/table.css';
 
@@ -49,8 +49,12 @@ const BooksList: React.FC = () => {
     return (
         <div>
             {alert && <Alert severity={alert.severity}>{alert.message}</Alert>}
-            <h2>Books List</h2>
-            <Link to="/books/new">Add New Book</Link>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+                <h2>Books List</h2>
+                <Link to="/books/new">
+                    <Button variant="contained" startIcon={ <RiAddFill /> }>New Book</Button>
+                </Link>
+            </Box>
             <Table>
                 <TableHead>
                     <TableRow className="list-table-head">
@@ -71,8 +75,8 @@ const BooksList: React.FC = () => {
                             <TableCell className='align-right'>{book.year}</TableCell>
                             <TableCell className='align-right'>{book.price}</TableCell>
                             <TableCell className='align-center'>
-                                <Link to={`/books/${book.id}`}><RiEyeLine /></Link>{' '}
-                                <Link to={`/books/${book.id}/edit`}><RiPencilLine /></Link>{' '}
+                                <Link to={`/books/${book.id}`}><Button variant="text" startIcon={<RiEyeLine />}></Button></Link>{' '}
+                                <Link to={`/books/${book.id}/edit`}><Button variant="text" startIcon={<RiPencilLine />}></Button></Link>{' '}
                                 <DeleteButton onConfirm={() => deleteBook(book.id)} confirmDialog icon />
                             </TableCell>
                         </TableRow>
