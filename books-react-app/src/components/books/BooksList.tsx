@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Book, Page } from '../../interfaces';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { RiEyeLine, RiPencilLine, RiDeleteBinLine } from 'react-icons/ri';
 import '../../styles/table.css';
 
 const BooksList: React.FC = () => {
@@ -52,9 +53,9 @@ const BooksList: React.FC = () => {
                             <TableCell className='align-right'>{book.year}</TableCell>
                             <TableCell className='align-right'>{book.price}</TableCell>
                             <TableCell className='align-center'>
-                                <Link to={`/books/${book.id}`}>View</Link>{' '}
-                                <Link to={`/books/${book.id}/edit`}>Edit</Link>{' '}
-                                <button onClick={() => deleteBook(book.id)}>Delete</button>
+                                <Link to={`/books/${book.id}`}><RiEyeLine /></Link>{' '}
+                                <Link to={`/books/${book.id}/edit`}><RiPencilLine /></Link>{' '}
+                                <button onClick={() => deleteBook(book.id)}><RiDeleteBinLine /></button>
                             </TableCell>
                         </TableRow>
                     ))}
