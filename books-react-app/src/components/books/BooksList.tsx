@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Book, Page } from '../../interfaces';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 
 const BooksList: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
@@ -30,34 +31,34 @@ const BooksList: React.FC = () => {
         <div>
             <h2>Books List</h2>
             <Link to="/books/new">Add New Book</Link>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Year</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>ID</TableCell>
+                        <TableCell>Title</TableCell>
+                        <TableCell>Author</TableCell>
+                        <TableCell>Year</TableCell>
+                        <TableCell>Price</TableCell>
+                        <TableCell>Actions</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {books.map(book => (
-                        <tr key={book.id}>
-                            <td>{book.id}</td>
-                            <td>{book.title}</td>
-                            <td>{book.author}</td>
-                            <td>{book.year}</td>
-                            <td>{book.price}</td>
-                            <td>
+                        <TableRow key={book.id}>
+                            <TableCell>{book.id}</TableCell>
+                            <TableCell>{book.title}</TableCell>
+                            <TableCell>{book.author}</TableCell>
+                            <TableCell>{book.year}</TableCell>
+                            <TableCell>{book.price}</TableCell>
+                            <TableCell>
                                 <Link to={`/books/${book.id}`}>View</Link>{' '}
                                 <Link to={`/books/${book.id}/edit`}>Edit</Link>{' '}
                                 <button onClick={() => deleteBook(book.id)}>Delete</button>
-                            </td>
-                        </tr>
+                            </TableCell>
+                        </TableRow>
                     ))}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
         </div>
     );
 };
