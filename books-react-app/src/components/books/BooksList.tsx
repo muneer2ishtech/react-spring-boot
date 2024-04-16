@@ -30,7 +30,11 @@ const BooksList: React.FC = () => {
                 }
             })
             .catch(error => {
-                console.error('Error deleting book:', error);
+                if (error.response?.status === 410) {
+                    setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
+                } else {
+                    console.error('Error deleting book:', error);
+                }
             });
     };
 
