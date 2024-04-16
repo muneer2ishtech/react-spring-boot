@@ -18,6 +18,8 @@ const BooksList: React.FC = () => {
             })
             .catch(error => {
                 console.error('Error fetching books:', error);
+                const errorMessage = error.message || error.response?.data?.message;
+                setAlert({ severity: 'error', message: `Error in fetching Books. ${errorMessage}` });
             });
     }, []);
 
