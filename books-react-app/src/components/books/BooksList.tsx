@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Book, Page } from '../../interfaces';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
-import { RiEyeLine, RiPencilLine, RiDeleteBinLine } from 'react-icons/ri';
+import { RiEyeLine, RiPencilLine } from 'react-icons/ri';
+import DeleteButton from '../common/DeleteButton';
 import '../../styles/table.css';
 
 const BooksList: React.FC = () => {
@@ -55,7 +56,7 @@ const BooksList: React.FC = () => {
                             <TableCell className='align-center'>
                                 <Link to={`/books/${book.id}`}><RiEyeLine /></Link>{' '}
                                 <Link to={`/books/${book.id}/edit`}><RiPencilLine /></Link>{' '}
-                                <button onClick={() => deleteBook(book.id)}><RiDeleteBinLine /></button>
+                                <DeleteButton onConfirm={() => deleteBook(book.id)} icon />
                             </TableCell>
                         </TableRow>
                     ))}
