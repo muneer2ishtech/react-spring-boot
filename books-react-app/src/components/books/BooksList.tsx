@@ -22,8 +22,8 @@ const BooksList: React.FC = () => {
 
     const deleteBook = (id: number) => {
         axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
-            .then(ressponse => {
-                if (ressponse.status === 410) {
+            .then(response => {
+                if (response.status === 410) {
                     setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
                 } else {
                     // TODO warning
