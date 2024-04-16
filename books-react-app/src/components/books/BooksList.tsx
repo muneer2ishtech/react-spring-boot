@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Book, Page } from '../../interfaces';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { Table, TableHead, TableBody, TableRow, TableCell, Alert } from '@mui/material';
 import { RiEyeLine, RiPencilLine } from 'react-icons/ri';
 import DeleteButton from '../common/DeleteButton';
 import '../../styles/table.css';
 
 const BooksList: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
+    const [alert, setAlert] = useState<{ message: string; severity: 'success' | 'error' | 'warning' | 'info' } | null>(null);
 
     useEffect(() => {
         axios.get<Page<Book>>(`${process.env.REACT_APP_API_URL}/api/v1/books`)
@@ -24,22 +25,28 @@ const BooksList: React.FC = () => {
         axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(response => {
                 if (response.status === 410) {
+                    setAlert({ severity: 'success', message: `Delete Book(${id}) successfully.` });
                     setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
                 } else {
-                    // TODO warning
+                    console.warn(`Unexpected response ${response.status} when deleting Book(${id}).`);
+                    setAlert({ severity: 'warning', message: `Unexpected response ${response.status} when deleting Book(${id}).` });
                 }
             })
             .catch(error => {
                 if (error.response?.status === 410) {
+                    setAlert({ severity: 'success', message: `Delete Book(${id}) successfully.` });
                     setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
                 } else {
                     console.error('Error deleting book:', error);
+                    const errorMessage = error.message || error.response?.data?.message;
+                    setAlert({ severity: 'error', message: `Error in deleting Book(${id}). ${errorMessage}` });
                 }
             });
     };
 
     return (
         <div>
+            {alert && <Alert severity={alert.severity}>{alert.message}</Alert>}
             <h2>Books List</h2>
             <Link to="/books/new">Add New Book</Link>
             <Table>
