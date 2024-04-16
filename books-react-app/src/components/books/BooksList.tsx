@@ -4,10 +4,10 @@ import axios from 'axios';
 import { Book, Page } from '../../interfaces';
 
 const BooksList: React.FC = () => {
-    const [books, setBooks] = useState < Book[] > ([]);
+    const [books, setBooks] = useState<Book[]>([]);
 
     useEffect(() => {
-        axios.get <Page <Book>> (`${process.env.REACT_APP_API_URL}/api/v1/books`)
+        axios.get<Page<Book>>(`${process.env.REACT_APP_API_URL}/api/v1/books`)
             .then(response => {
                 setBooks(response.data?.content);
             })
