@@ -52,7 +52,7 @@ const BooksList: React.FC = () => {
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <h2>Books List</h2>
                 <Link to="/books/new">
-                    <Button variant="contained" startIcon={ <RiAddFill /> }>New Book</Button>
+                    <Button variant="contained" startIcon={<RiAddFill />}>New Book</Button>
                 </Link>
             </Box>
             <Table>
