@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, AlertProps } from '@mui/material';
 
-interface AlertMessageProps {
+export interface AlertMessageProps {
     severity?: 'success' | 'error' | 'warning' | 'info';
     message?: string;
     onClose?: () => void;

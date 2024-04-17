@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Book, Page } from '../../interfaces';
-import { Table, TableHead, TableBody, TableRow, TableCell, Alert, Button, Box } from '@mui/material';
+import { Table, TableHead, TableBody, TableRow, TableCell, Button, Box } from '@mui/material';
 import { RiEyeLine, RiPencilLine, RiAddFill } from 'react-icons/ri';
 import DeleteButton from '../common/DeleteButton';
+import AlertMessage, { AlertMessageProps } from '../common/AlertMessage';
 import '../../styles/table.css';
 
 const BooksList: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
-    const [alert, setAlert] = useState<{ message: string; severity: 'success' | 'error' | 'warning' | 'info' } | null>(null);
+    const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
     useEffect(() => {
         axios.get<Page<Book>>(`${process.env.REACT_APP_API_URL}/api/v1/books`)
@@ -19,7 +20,7 @@ const BooksList: React.FC = () => {
             .catch(error => {
                 console.error('Error fetching books:', error);
                 const errorMessage = error.message || error.response?.data?.message;
-                setAlert({ severity: 'error', message: `Error in fetching Books. ${errorMessage}` });
+                setAlertMessageProps({ severity: 'error', message: `Error in fetching Books. ${errorMessage}` });
             });
     }, []);
 
@@ -27,32 +28,28 @@ const BooksList: React.FC = () => {
         axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(response => {
                 if (response.status === 410) {
-                    setAlert({ severity: 'success', message: `Delete Book(${id}) successfully.` });
+                    setAlertMessageProps({ severity: 'success', message: `Delete Book(${id}) successfully.` });
                     setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
                 } else {
                     console.warn(`Unexpected response ${response.status} when deleting Book(${id}).`);
-                    setAlert({ severity: 'warning', message: `Unexpected response ${response.status} when deleting Book(${id}).` });
+                    setAlertMessageProps({ severity: 'warning', message: `Unexpected response ${response.status} when deleting Book(${id}).` });
                 }
             })
             .catch(error => {
                 if (error.response?.status === 410) {
-                    setAlert({ severity: 'success', message: `Delete Book(${id}) successfully.` });
+                    setAlertMessageProps({ severity: 'success', message: `Delete Book(${id}) successfully.` });
                     setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
                 } else {
                     console.error('Error deleting book:', error);
                     const errorMessage = error.message || error.response?.data?.message;
-                    setAlert({ severity: 'error', message: `Error in deleting Book(${id}). ${errorMessage}` });
+                    setAlertMessageProps({ severity: 'error', message: `Error in deleting Book(${id}). ${errorMessage}` });
                 }
             });
     };
 
-    const handleCloseAlert = () => {
-        setAlert(null);
-    };
-
     return (
         <div>
-            {alert && <Alert severity={alert.severity} onClose={handleCloseAlert}>{alert.message}</Alert>}
+            {alertMessageProps && <AlertMessage {...alertMessageProps} />}
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <h2 className="list-table-title">Books List</h2>
                 <Link to="/books/new">
