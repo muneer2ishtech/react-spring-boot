@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { SignUpFormData } from '../../interfaces';
+import { API_URL } from '../../misc/apiConfig';
 
 const SignUp: React.FC = () => {
     const [formData, setFormData] = useState<SignUpFormData>({
@@ -16,7 +17,7 @@ const SignUp: React.FC = () => {
             setError('Passwords do not match');
             return;
         }
-        axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, formData)
+        axios.post(`${API_URL}/api/signup`, formData)
             .then(response => {
                 console.log('Signed up successfully:', response.data);
                 // Redirect or handle success as needed

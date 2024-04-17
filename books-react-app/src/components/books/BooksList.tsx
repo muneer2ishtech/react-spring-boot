@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { RiAddFill, RiEyeLine, RiPencilLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { Book, Page } from '../../interfaces';
+import { API_URL } from '../../misc/apiConfig';
 import '../../styles/table.css';
 import AlertMessage, { AlertMessageProps } from '../common/AlertMessage';
 import DeleteButton from '../common/DeleteButton';
@@ -14,7 +15,7 @@ const BooksList: React.FC = () => {
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
     useEffect(() => {
-        axios.get<Page<Book>>(`${process.env.REACT_APP_API_URL}/api/v1/books`)
+        axios.get<Page<Book>>(`${API_URL}/api/v1/books`)
             .then(response => {
                 setBooks(response.data?.content);
             })
@@ -28,7 +29,7 @@ const BooksList: React.FC = () => {
 
     const deleteBook = (id: number) => {
         setLoading(true);
-        axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
+        axios.delete(`${API_URL}/api/v1/books/${id}`)
             .then(response => {
                 if (response.status === 410) {
                     setAlertMessageProps({ severity: 'success', message: `Delete Book(${id}) successfully.` });

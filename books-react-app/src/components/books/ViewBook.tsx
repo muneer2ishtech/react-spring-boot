@@ -6,6 +6,7 @@ import { RiDeleteBinLine, RiPencilLine } from 'react-icons/ri';
 import { TbBooks } from 'react-icons/tb';
 import { Link, useParams } from 'react-router-dom';
 import { Book } from '../../interfaces';
+import { API_URL } from '../../misc/apiConfig';
 import '../../styles/table.css';
 import AlertMessage, { AlertMessageProps } from '../common/AlertMessage';
 
@@ -17,7 +18,7 @@ const ViewBook: React.FC = () => {
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
     useEffect(() => {
-        axios.get<Book>(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
+        axios.get<Book>(`${API_URL}/api/v1/books/${id}`)
             .then(response => {
                 setBook(response.data);
             })
@@ -31,7 +32,7 @@ const ViewBook: React.FC = () => {
 
     const handleDelete = () => {
         setLoading(true);
-        axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
+        axios.delete(`${API_URL}/api/v1/books/${id}`)
             .then(response => {
                 if (response.status === 410) {
                     setAlertMessageProps({ severity: 'success', message: `Book(${id}) deleted successfully.` });

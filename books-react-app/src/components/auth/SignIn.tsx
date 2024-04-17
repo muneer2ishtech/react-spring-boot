@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createBrowserHistory } from 'history';
 import React, { useState } from 'react';
+import { API_URL } from '../../misc/apiConfig';
 
 const SignIn: React.FC = () => {
   const history = createBrowserHistory();
@@ -16,7 +17,7 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.post(`${process.env.REACT_APP_API_URL}/api/signin`, credentials)
+    axios.post(`${API_URL}/api/signin`, credentials)
       .then(() => {
         // Redirect to desired page after sign in
       })
