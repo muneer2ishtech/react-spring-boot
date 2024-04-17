@@ -80,25 +80,25 @@ const NewBook: React.FC = () => {
             <Table>
                 <TableBody>
                     <TableRow className='list-table-row-odd'>
-                        <TableCell variant='head'>Title</TableCell>
+                        <TableCell>Title</TableCell>
                         <TableCell>
                             <TextField required name="title" value={book.title} onChange={handleChange} />
                         </TableCell>
                     </TableRow>
                     <TableRow className='list-table-row-even'>
-                        <TableCell variant='head'>Author</TableCell>
+                        <TableCell>Author</TableCell>
                         <TableCell>
                             <TextField required name="author" value={book.author} onChange={handleChange} />
                         </TableCell>
                     </TableRow>
                     <TableRow className='list-table-row-odd'>
-                        <TableCell variant='head'>Year</TableCell>
+                        <TableCell>Year</TableCell>
                         <TableCell>
                             <TextField type="number" required name="year" value={book.year} onChange={handleChange} />
                         </TableCell>
                     </TableRow>
                     <TableRow className='list-table-row-even'>
-                        <TableCell variant='head'>Price</TableCell>
+                        <TableCell>Price</TableCell>
                         <TableCell>
                             <TextField type="number" required name="price" value={book.price} onChange={handleChange} inputProps={{ step: '0.01' }} />
                         </TableCell>

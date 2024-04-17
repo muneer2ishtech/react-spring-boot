@@ -68,23 +68,23 @@ const ViewBook: React.FC = () => {
                 <Table>
                     <TableBody>
                         <TableRow className='list-table-row-even'>
-                            <TableCell variant='head'>ID</TableCell>
+                            <TableCell>ID</TableCell>
                             <TableCell>{book.id}</TableCell>
                         </TableRow>
                         <TableRow className='list-table-row-odd'>
-                            <TableCell variant='head'>Title</TableCell>
+                            <TableCell>Title</TableCell>
                             <TableCell>{book.title}</TableCell>
                         </TableRow>
                         <TableRow className='list-table-row-even'>
-                            <TableCell variant='head'>Author</TableCell>
+                            <TableCell>Author</TableCell>
                             <TableCell>{book.author}</TableCell>
                         </TableRow>
                         <TableRow className='list-table-row-odd'>
-                            <TableCell variant='head'>Year</TableCell>
+                            <TableCell>Year</TableCell>
                             <TableCell>{book.year}</TableCell>
                         </TableRow>
                         <TableRow className='list-table-row-even'>
-                            <TableCell variant='head'>Price</TableCell>
+                            <TableCell>Price</TableCell>
                             <TableCell>{book.price}</TableCell>
                         </TableRow>
                     </TableBody>
