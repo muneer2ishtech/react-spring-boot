@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Table, TableBody, TableCell, TableRow } from '@mui/material';
+import { Button, CircularProgress, Table, TableBody, TableCell, TableRow, TextField } from '@mui/material';
 import axios from 'axios';
 import { createBrowserHistory } from 'history';
 import React, { useEffect, useState } from 'react';
@@ -86,23 +86,33 @@ const EditBook: React.FC = () => {
                     <TableBody>
                         <TableRow className='list-table-row-even'>
                             <TableCell variant='head'>ID</TableCell>
-                            <TableCell><input type="text" name="id" value={book.id} readOnly /></TableCell>
+                            <TableCell>
+                                <TextField required name="id" value={book.id} disabled />
+                            </TableCell>
                         </TableRow>
                         <TableRow className='list-table-row-odd'>
                             <TableCell variant='head'>Title</TableCell>
-                            <TableCell><input type="text" name="title" value={book.title} onChange={handleChange} /></TableCell>
+                            <TableCell>
+                                <TextField required name="title" value={book.title} onChange={handleChange} />
+                            </TableCell>
                         </TableRow>
                         <TableRow className='list-table-row-even'>
                             <TableCell variant='head'>Author</TableCell>
-                            <TableCell><input type="text" name="author" value={book.author} onChange={handleChange} /></TableCell>
+                            <TableCell>
+                                <TextField required name="author" value={book.author} onChange={handleChange} />
+                            </TableCell>
                         </TableRow>
                         <TableRow className='list-table-row-odd'>
                             <TableCell variant='head'>Year</TableCell>
-                            <TableCell><input type="number" name="year" value={book.year} onChange={handleChange} /></TableCell>
+                            <TableCell>
+                                <TextField type="number" required name="year" value={book.year} onChange={handleChange} />
+                            </TableCell>
                         </TableRow>
                         <TableRow className='list-table-row-even'>
                             <TableCell variant='head'>Price</TableCell>
-                            <TableCell><input type="number" name="price" value={book.price} onChange={handleChange} /></TableCell>
+                            <TableCell>
+                                <TextField type="number" required name="price" value={book.price} onChange={handleChange} inputProps={{ step: '0.01' }} />
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
