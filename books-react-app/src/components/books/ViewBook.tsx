@@ -24,17 +24,17 @@ const ViewBook: React.FC = () => {
             .catch(error => {
                 console.error('Error fetching book:', error);
                 const errorMessage = error.message || error.response?.data?.message;
-                setAlertMessageProps({ severity: 'error', message: `Error in fetching Book. ${errorMessage}` });
+                setAlertMessageProps({ severity: 'error', message: `Error in fetching Book(${id}). ${errorMessage}` });
             })
             .finally(() => setLoading(false));
     }, [id]);
 
     const handleDelete = () => {
-        setLoading(false);
+        setLoading(true);
         axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(response => {
                 if (response.status === 410) {
-                    setAlertMessageProps({ severity: 'success', message: `Delete Book(${id}) successfully.` });
+                    setAlertMessageProps({ severity: 'success', message: `Book(${id}) deleted successfully.` });
                     history.push('/books');
                 } else {
                     console.warn(`Unexpected response ${response.status} when deleting Book(${id}).`);
@@ -46,7 +46,7 @@ const ViewBook: React.FC = () => {
                     setAlertMessageProps({ severity: 'success', message: `Delete Book(${id}) successfully.` });
                     history.push('/books');
                 } else {
-                    console.error('Error deleting book:', error);
+                    console.error(`Error in deleting Book(${id}):`, error);
                     const errorMessage = error.message || error.response?.data?.message;
                     setAlertMessageProps({ severity: 'error', message: `Error in deleting Book(${id}). ${errorMessage}` });
                 }
@@ -67,24 +67,24 @@ const ViewBook: React.FC = () => {
             {book && (
                 <Table>
                     <TableBody>
-                        <TableRow>
-                            <TableCell>ID</TableCell>
+                        <TableRow className='list-table-row-even'>
+                            <TableCell variant='head'>ID</TableCell>
                             <TableCell>{book.id}</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>Title</TableCell>
+                        <TableRow className='list-table-row-odd'>
+                            <TableCell variant='head'>Title</TableCell>
                             <TableCell>{book.title}</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>Author</TableCell>
+                        <TableRow className='list-table-row-even'>
+                            <TableCell variant='head'>Author</TableCell>
                             <TableCell>{book.author}</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>Year</TableCell>
+                        <TableRow className='list-table-row-odd'>
+                            <TableCell variant='head'>Year</TableCell>
                             <TableCell>{book.year}</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>Price</TableCell>
+                        <TableRow className='list-table-row-even'>
+                            <TableCell variant='head'>Price</TableCell>
                             <TableCell>{book.price}</TableCell>
                         </TableRow>
                     </TableBody>
