@@ -25,9 +25,10 @@ const NewBook: React.FC = () => {
         if (book) {
             setLoading(true);
             axios.post(`${process.env.REACT_APP_API_URL}/api/v1/books`, book)
-                .then(() => {
-                    setAlertMessageProps({ severity: 'success', message: `Book(${id}) updated successfully.` });
-                    history.push('/books');
+                .then(response => {
+                    const newBookId = response.data?.id;
+                    setAlertMessageProps({ severity: 'success', message: `Book(${newBookId}) created successfully.` });
+                    newBookId ? history.push(`/books/${newBookId}`) : history.push(`/books`);
                 })
                 .catch(error => {
                     console.error('Error adding new book:', error);
