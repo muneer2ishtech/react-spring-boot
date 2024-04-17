@@ -18,6 +18,10 @@ const EditBook: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+
     useEffect(() => {
         axios.get<Book>(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(response => {
@@ -41,7 +45,7 @@ const EditBook: React.FC = () => {
     const handleSave = () => {
         if (book) {
             setLoading(true);
-            axios.put(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`, book)
+            axios.put(`${process.env.REACT_APP_API_URL}/api/v1/books`, book, { headers })
                 .then(() => {
                     setAlertMessageProps({ severity: 'success', message: `Book(${id}) updated successfully.` });
                     history.push(`/books/${id}`);

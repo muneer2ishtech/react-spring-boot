@@ -21,10 +21,14 @@ const NewBook: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+
     const handleSave = () => {
         if (book) {
             setLoading(true);
-            axios.post(`${process.env.REACT_APP_API_URL}/api/v1/books`, book)
+            axios.post(`${process.env.REACT_APP_API_URL}/api/v1/books`, book, { headers })
                 .then(response => {
                     const newBookId = response.data?.id;
                     setAlertMessageProps({ severity: 'success', message: `Book(${newBookId}) created successfully.` });
