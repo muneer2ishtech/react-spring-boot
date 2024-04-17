@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import BookIcon from "@mui/icons-material/Book";
+import { TbBooks } from "react-icons/tb";
 import "./SideNav.css";
 
 const SideNav: React.FC = () => {
@@ -18,7 +18,7 @@ const SideNav: React.FC = () => {
                 {isNavOpen ? <MenuOpenIcon /> : <MenuIcon />}
             </div>
             <Link to="/books">
-                <BookIcon />
+                <TbBooks />
                 {isNavOpen && <span className = "sidemenu-text">Books</span>}
             </Link>
         </div>
