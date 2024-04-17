@@ -1,78 +1,109 @@
-// components/books/ViewBook.tsx
-
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
 import { Book } from '../../interfaces';
+import { Button, Table, TableBody, TableRow, TableCell, Alert, CircularProgress } from '@mui/material';
+import { RiPencilLine, RiDeleteBinLine } from 'react-icons/ri';
+import { TbBooks } from 'react-icons/tb';
+import '../../styles/table.css';
 
 const ViewBook: React.FC = () => {
-    const { id } = useParams < { id: string } > ();
+    const { id } = useParams<{ id: string }>();
     const history = createBrowserHistory();
-    const [book, setBook] = useState < Book | null > (null);
+    const [book, setBook] = useState<Book | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [alert, setAlert] = useState<{ message: string; severity: 'success' | 'error' | 'warning' | 'info' } | null>(null);
 
     useEffect(() => {
-        axios.get < Book > (`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
+        axios.get<Book>(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(response => {
                 setBook(response.data);
             })
             .catch(error => {
                 console.error('Error fetching book:', error);
-            });
+                const errorMessage = error.message || error.response?.data?.message;
+                setAlert({ severity: 'error', message: `Error in fetching Book. ${errorMessage}` });
+            })
+            .finally(() => setLoading(false));
     }, [id]);
 
-    const handleEdit = () => {
-        history.push(`/books/${id}/edit`);
-    };
-
     const handleDelete = () => {
+        setLoading(false);
         axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
-            .then(() => {
-                history.push('/books');
+            .then(response => {
+                if (response.status === 410) {
+                    setAlert({ severity: 'success', message: `Delete Book(${id}) successfully.` });
+                    history.push('/books');
+                } else {
+                    console.warn(`Unexpected response ${response.status} when deleting Book(${id}).`);
+                    setAlert({ severity: 'warning', message: `Unexpected response ${response.status} when deleting Book(${id}).` });
+                }
             })
             .catch(error => {
-                console.error('Error deleting book:', error);
-            });
+                if (error.response?.status === 410) {
+                    setAlert({ severity: 'success', message: `Delete Book(${id}) successfully.` });
+                    history.push('/books');
+                } else {
+                    console.error('Error deleting book:', error);
+                    const errorMessage = error.message || error.response?.data?.message;
+                    setAlert({ severity: 'error', message: `Error in deleting Book(${id}). ${errorMessage}` });
+                }
+            })
+            .finally(() => setLoading(false));
     };
 
-    const handleList = () => {
-        history.push('/books');
-    };
-
-    if (!book) {
-        return <div>Loading...</div>;
+    if (loading) {
+        return <CircularProgress />;
     }
 
     return (
         <div>
-            <h2>View Book</h2>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>ID</td>
-                        <td>{book.id}</td>
-                    </tr>
-                    <tr>
-                        <td>Title</td>
-                        <td>{book.title}</td>
-                    </tr>
-                    <tr>
-                        <td>Author</td>
-                        <td>{book.author}</td>
-                    </tr>
-                    <tr>
-                        <td>Year</td>
-                        <td>{book.year}</td>
-                    </tr>
-                    <tr>
-                        <td>Price</td>
-                        <td>{book.price}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button onClick={handleEdit}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
-            <button onClick={handleList}>List</button>
+            {alert && <Alert severity={alert.severity} onClose={() => setAlert(null)}>{alert.message}</Alert>}
+            <div>
+                <h2 style={{ textAlign: 'center' }}>View Book</h2>
+            </div>
+            {book && (
+                <Table>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell>{book.id}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Title</TableCell>
+                            <TableCell>{book.title}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Author</TableCell>
+                            <TableCell>{book.author}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Year</TableCell>
+                            <TableCell>{book.year}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Price</TableCell>
+                            <TableCell>{book.price}</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            )}
+            <div>
+                {book && (
+                    <Link to={`/books/${book.id}/edit`}>
+                        <Button variant="contained" className='view-table-btn' startIcon={<RiPencilLine />}>Edit</Button>
+                    </Link>
+                )}
+                {book && (
+                    <Button variant="contained" className='view-table-btn' startIcon={<RiDeleteBinLine />} onClick={handleDelete}>Delete</Button>
+                )}
+                <Link to="/books">
+                    <Button variant="contained" className='view-table-btn' startIcon={<TbBooks />}>
+                        Back to Books List
+                    </Button>
+                </Link>
+            </div>
         </div>
     );
 };
