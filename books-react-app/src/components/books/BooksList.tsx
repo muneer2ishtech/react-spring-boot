@@ -46,9 +46,13 @@ const BooksList: React.FC = () => {
             });
     };
 
+    const handleCloseAlert = () => {
+        setAlert(null);
+    };
+
     return (
         <div>
-            {alert && <Alert severity={alert.severity}>{alert.message}</Alert>}
+            {alert && <Alert severity={alert.severity} onClose={handleCloseAlert}>{alert.message}</Alert>}
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <h2 className="list-table-title">Books List</h2>
                 <Link to="/books/new">
