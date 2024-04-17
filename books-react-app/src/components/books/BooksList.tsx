@@ -77,8 +77,12 @@ const BooksList: React.FC = () => {
                             <TableCell className='align-right'>{book.year}</TableCell>
                             <TableCell className='align-right'>{book.price}</TableCell>
                             <TableCell className='align-center'>
-                                <Link to={`/books/${book.id}`}><Button variant="text" startIcon={<RiEyeLine />}></Button></Link>{' '}
-                                <Link to={`/books/${book.id}/edit`}><Button variant="text" startIcon={<RiPencilLine />}></Button></Link>{' '}
+                                <Link to={`/books/${book.id}`}>
+                                    <Button variant="text" style={{ minWidth: 'auto' }}><RiEyeLine /></Button>
+                                </Link>
+                                <Link to={`/books/${book.id}/edit`}>
+                                    <Button variant="text" style={{ minWidth: 'auto' }}><RiPencilLine /></Button>
+                                </Link>
                                 <DeleteButton onConfirm={() => deleteBook(book.id)} confirmDialog icon />
                             </TableCell>
                         </TableRow>
