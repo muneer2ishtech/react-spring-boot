@@ -79,10 +79,6 @@ const NewBook: React.FC = () => {
             </div>
             <Table>
                 <TableBody>
-                    <TableRow className='list-table-row-even'>
-                        <TableCell variant='head'>ID</TableCell>
-                        <TableCell><input type="text" name="id" value={book.id} readOnly /></TableCell>
-                    </TableRow>
                     <TableRow className='list-table-row-odd'>
                         <TableCell variant='head'>Title</TableCell>
                         <TableCell>
