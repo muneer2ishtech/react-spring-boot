@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Muneer Ahmed Syed
  */
 @RestController
-@CrossOrigin(methods = { RequestMethod.GET, RequestMethod.HEAD, RequestMethod.POST, RequestMethod.PUT,
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.HEAD, RequestMethod.POST, RequestMethod.PUT,
 		RequestMethod.PATCH, RequestMethod.DELETE, RequestMethod.OPTIONS, RequestMethod.TRACE })
 @Slf4j
 public class BookController {
