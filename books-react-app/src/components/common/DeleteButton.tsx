@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { RiDeleteBinLine, RiCloseLine, RiCheckLine } from 'react-icons/ri';
+import React, { useState } from 'react';
+import { RiCheckLine, RiCloseLine, RiDeleteBinLine } from 'react-icons/ri';
 
 interface DeleteButtonProps {
     onConfirm: () => void;

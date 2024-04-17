@@ -1,5 +1,5 @@
-import React from 'react';
 import { createBrowserHistory } from 'history';
+import React from 'react';
 
 const SignOut: React.FC = () => {
   const history = createBrowserHistory();

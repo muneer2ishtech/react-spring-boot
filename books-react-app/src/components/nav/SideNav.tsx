@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import React, { useState } from "react";
 import { TbBooks } from "react-icons/tb";
+import { Link } from "react-router-dom";
 import "./SideNav.css";
 
 const SideNav: React.FC = () => {
@@ -19,7 +19,7 @@ const SideNav: React.FC = () => {
             </div>
             <Link to="/books">
                 <TbBooks />
-                {isNavOpen && <span className = "sidemenu-text">Books</span>}
+                {isNavOpen && <span className="sidemenu-text">Books</span>}
             </Link>
         </div>
     );

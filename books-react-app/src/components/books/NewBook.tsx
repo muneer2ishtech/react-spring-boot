@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { createBrowserHistory } from 'history';
 import axios from 'axios';
+import { createBrowserHistory } from 'history';
+import React, { useState } from 'react';
 import { NewBook as Book } from '../../interfaces';
 
 const NewBook: React.FC = () => {
     const history = createBrowserHistory();
-    const [book, setBook] = useState < Book > ({
+    const [book, setBook] = useState<Book>({
         id: null,
         title: '',
         author: '',

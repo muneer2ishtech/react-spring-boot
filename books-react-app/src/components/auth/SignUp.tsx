@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 import { SignUpFormData } from '../../interfaces';
 
 const SignUp: React.FC = () => {
-    const [formData, setFormData] = useState < SignUpFormData > ({
+    const [formData, setFormData] = useState<SignUpFormData>({
         username: '',
         password: '',
         repeatPassword: ''

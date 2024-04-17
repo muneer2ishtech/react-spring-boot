@@ -1,7 +1,7 @@
+import axios from 'axios';
+import { createBrowserHistory } from 'history';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import axios from 'axios';
 import { Book } from '../../interfaces';
 
 const EditBook: React.FC = () => {
