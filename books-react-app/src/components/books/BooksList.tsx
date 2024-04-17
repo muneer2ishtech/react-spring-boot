@@ -1,4 +1,4 @@
-import { Box, Button, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { Box, Button, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { RiAddFill, RiEyeLine, RiPencilLine } from 'react-icons/ri';
@@ -10,6 +10,7 @@ import DeleteButton from '../common/DeleteButton';
 
 const BooksList: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
     useEffect(() => {
@@ -21,10 +22,12 @@ const BooksList: React.FC = () => {
                 console.error('Error fetching books:', error);
                 const errorMessage = error.message || error.response?.data?.message;
                 setAlertMessageProps({ severity: 'error', message: `Error in fetching Books. ${errorMessage}` });
-            });
+            })
+            .finally(() => setLoading(false));
     }, []);
 
     const deleteBook = (id: number) => {
+        setLoading(true);
         axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
             .then(response => {
                 if (response.status === 410) {
@@ -44,8 +47,13 @@ const BooksList: React.FC = () => {
                     const errorMessage = error.message || error.response?.data?.message;
                     setAlertMessageProps({ severity: 'error', message: `Error in deleting Book(${id}). ${errorMessage}` });
                 }
-            });
+            })
+            .finally(() => setLoading(false));
     };
+
+    if (loading) {
+        return <CircularProgress />;
+    }
 
     return (
         <div>
