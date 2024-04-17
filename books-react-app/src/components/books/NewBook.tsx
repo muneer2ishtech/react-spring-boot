@@ -23,10 +23,6 @@ const NewBook: React.FC = () => {
             });
     };
 
-    const handleCancel = () => {
-        history.push('/books');
-    };
-
     const handleReset = () => {
         setBook({
             id: null,
@@ -35,6 +31,10 @@ const NewBook: React.FC = () => {
             year: 0,
             price: 0
         });
+    };
+
+    const handleCancel = () => {
+        history.push('/books');
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
