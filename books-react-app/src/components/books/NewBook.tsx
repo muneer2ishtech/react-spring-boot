@@ -33,7 +33,7 @@ const NewBook: React.FC = () => {
                 .catch(error => {
                     console.error('Error adding new book:', error);
                     const errorMessage = error.message || error.response?.data?.message;
-                    setAlertMessageProps({ severity: 'error', message: `Error in updating Book(${id}). ${errorMessage}` });
+                    setAlertMessageProps({ severity: 'error', message: `Error in creating new Book. ${errorMessage}` });
                 })
                 .finally(() => setLoading(false));
         } else {
