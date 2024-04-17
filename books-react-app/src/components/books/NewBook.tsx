@@ -9,15 +9,17 @@ import { NewBook as Book } from '../../interfaces';
 import '../../styles/table.css';
 import AlertMessage, { AlertMessageProps } from '../common/AlertMessage';
 
+const initialBookState: Book = {
+    id: null,
+    title: '',
+    author: '',
+    year: 0,
+    price: 0
+};
+
 const NewBook: React.FC = () => {
     const history = createBrowserHistory();
-    const [book, setBook] = useState<Book>({
-        id: null,
-        title: '',
-        author: '',
-        year: 0,
-        price: 0
-    });
+    const [book, setBook] = useState<Book>(initialBookState);
     const [loading, setLoading] = useState<boolean>(false);
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
@@ -46,13 +48,7 @@ const NewBook: React.FC = () => {
     };
 
     const handleReset = () => {
-        setBook({
-            id: null,
-            title: '',
-            author: '',
-            year: 0,
-            price: 0
-        });
+        setBook(initialBookState);
     };
 
     const handleCancel = () => {
