@@ -6,6 +6,7 @@ import { BiReset } from 'react-icons/bi';
 import { FiSave } from 'react-icons/fi';
 import { TbBooks } from 'react-icons/tb';
 import { NewBook as Book } from '../../interfaces';
+import { API_URL, defaultHeaders } from '../../misc/apiConfig';
 import '../../styles/table.css';
 import AlertMessage, { AlertMessageProps } from '../common/AlertMessage';
 
@@ -23,14 +24,10 @@ const NewBook: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
-    const headers = {
-        'Content-Type': 'application/json',
-    };
-
     const handleSave = () => {
         if (book) {
             setLoading(true);
-            axios.post(`${process.env.REACT_APP_API_URL}/api/v1/books`, book, { headers })
+            axios.post(`${API_URL}/api/v1/books`, book, { headers: defaultHeaders })
                 .then(response => {
                     const newBookId = response.data?.id;
                     setAlertMessageProps({ severity: 'success', message: `Book(${newBookId}) created successfully.` });

@@ -7,6 +7,7 @@ import { FiSave } from 'react-icons/fi';
 import { TbBooks } from 'react-icons/tb';
 import { useParams } from 'react-router-dom';
 import { Book } from '../../interfaces';
+import { API_URL, defaultHeaders } from '../../misc/apiConfig';
 import '../../styles/table.css';
 import AlertMessage, { AlertMessageProps } from '../common/AlertMessage';
 
@@ -18,12 +19,8 @@ const EditBook: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
-    const headers = {
-        'Content-Type': 'application/json',
-    };
-
     useEffect(() => {
-        axios.get<Book>(`${process.env.REACT_APP_API_URL}/api/v1/books/${id}`)
+        axios.get<Book>(`${API_URL}/api/v1/books/${id}`)
             .then(response => {
                 setBook(response.data);
                 setOriginalBook(response.data);
@@ -45,7 +42,7 @@ const EditBook: React.FC = () => {
     const handleSave = () => {
         if (book) {
             setLoading(true);
-            axios.put(`${process.env.REACT_APP_API_URL}/api/v1/books`, book, { headers })
+            axios.put(`${API_URL}/api/v1/books`, book, { headers: defaultHeaders })
                 .then(() => {
                     setAlertMessageProps({ severity: 'success', message: `Book(${id}) updated successfully.` });
                     history.push(`/books/${id}`);
