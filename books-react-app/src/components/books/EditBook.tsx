@@ -52,6 +52,8 @@ const EditBook: React.FC = () => {
                     setAlertMessageProps({ severity: 'error', message: `Error in updating Book(${id}). ${errorMessage}` });
                 })
                 .finally(() => setLoading(false));
+        } else {
+            setAlertMessageProps({ severity: 'error', message: 'Error in saving Book' });
         }
     };
 
