@@ -92,14 +92,14 @@ const ViewBook: React.FC = () => {
             <div>
                 {book && (
                     <Link to={`/books/${book.id}/edit`}>
-                        <Button variant="contained" className='view-table-btn' startIcon={<RiPencilLine />}>Edit</Button>
+                        <Button variant="contained" startIcon={<RiPencilLine />} style={{ textTransform: 'none', margin: 2 }}>Edit</Button>
                     </Link>
                 )}
                 {book && (
-                    <Button variant="contained" className='view-table-btn' startIcon={<RiDeleteBinLine />} onClick={handleDelete}>Delete</Button>
+                    <Button variant="contained" startIcon={<RiDeleteBinLine />} onClick={handleDelete} style={{ textTransform: 'none', margin: 2 }}>Delete</Button>
                 )}
                 <Link to="/books">
-                    <Button variant="contained" className='view-table-btn' startIcon={<TbBooks />}>
+                    <Button variant="contained" startIcon={<TbBooks />} style={{ textTransform: 'none', margin: 2 }}>
                         Back to Books List
                     </Button>
                 </Link>
