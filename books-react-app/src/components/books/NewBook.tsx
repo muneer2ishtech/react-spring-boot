@@ -18,7 +18,7 @@ const NewBook: React.FC = () => {
         year: 0,
         price: 0
     });
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [alertMessageProps, setAlertMessageProps] = useState<AlertMessageProps | null>(null);
 
     const headers = {
