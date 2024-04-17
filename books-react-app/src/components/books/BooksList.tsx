@@ -83,7 +83,7 @@ const BooksList: React.FC = () => {
                                 <Link to={`/books/${book.id}/edit`}>
                                     <Button variant="text" style={{ minWidth: 'auto' }}><RiPencilLine /></Button>
                                 </Link>
-                                <DeleteButton onConfirm={() => deleteBook(book.id)} confirmDialog icon />
+                                <DeleteButton onConfirm={() => deleteBook(book.id)} confirmDialog icon style={{ minWidth: 'auto' }} />
                             </TableCell>
                         </TableRow>
                     ))}

@@ -6,9 +6,17 @@ interface DeleteButtonProps {
     onConfirm: () => void;
     confirmDialog?: boolean;
     icon?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
-const DeleteButton: React.FC<DeleteButtonProps> = ({ onConfirm, confirmDialog = false, icon = false }) => {
+const DeleteButton: React.FC<DeleteButtonProps> = ({
+    onConfirm,
+    confirmDialog = false,
+    icon = false,
+    className,
+    style
+}) => {
     const [openDialog, setOpenDialog] = useState(false);
 
     const handleDelete = () => {
@@ -30,7 +38,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ onConfirm, confirmDialog = 
 
     return (
         <>
-            <Button onClick={handleDelete}>
+            <Button onClick={handleDelete} className={className} style={style}>
                 {icon ? <RiDeleteBinLine /> : 'Delete'}
             </Button>
             {confirmDialog && (
