@@ -6,6 +6,8 @@ import BooksList from './components/books/BooksList';
 import NewBook from './components/books/NewBook';
 import ViewBook from './components/books/ViewBook';
 import EditBook from './components/books/EditBook';
+import SignUp from './components/auth/SignUp';
+import SignIn from './components/auth/SignIn';
 
 const App: React.FC = () => (
   <Router>
@@ -19,6 +21,9 @@ const App: React.FC = () => (
           <Route path="/books/new" element={<NewBook />} />
           <Route path="/books/:id" element={<ViewBook />} />
           <Route path="/books/:id/edit" element={<EditBook />} />
+
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
