@@ -11,7 +11,7 @@ COPY . .
 RUN npm install -g npm@10
 
 RUN npm install
-RUN npm run build
+RUN NODE_ENV=${NODE_ENV} npm run build
 
 # exec
 FROM nginx:stable-alpine
