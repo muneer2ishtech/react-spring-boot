@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  books-react-nginx:
+    container_name: books-react-nginx-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: ${NODE_ENV}
+    image: muneer2ishtech/books-react-app:0.1.0
+    ports:
+      - 80:80

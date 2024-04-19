@@ -48,5 +48,15 @@
 
     `npx tsc --init`
 
+## Docker
+
+```
+docker build --build-arg NODE_ENV=production -f Dockerfile . -t muneer2ishtech/books-react-app:0.1.0
+```
+
+```
+DOCKER_BUILD_ARGS="--build-arg NODE_ENV=development" docker compose up --build
+```
+
 ## References
 [React reference](./HELP.md)

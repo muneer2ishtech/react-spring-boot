@@ -1,0 +1,29 @@
+# local env
+.env
+.env.local
+.env.*.local
+
+# build
+node_modules
+build
+
+# git
+.git*
+
+# Docker
+docker-compose.y*ml
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+
+# ide
+.vscode
+
+# misc
+.DS_Store
+README.md
+HELP.md
