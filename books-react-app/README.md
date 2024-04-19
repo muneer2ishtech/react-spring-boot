@@ -55,7 +55,7 @@ docker build --build-arg NODE_ENV=production -f Dockerfile . -t muneer2ishtech/b
 ```
 
 ```
-DOCKER_BUILD_ARGS="--build-arg NODE_ENV=development" docker compose up --build
+NODE_ENV=development docker compose up --build
 ```
 
 ## References
