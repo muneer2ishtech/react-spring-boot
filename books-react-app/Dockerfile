@@ -3,22 +3,13 @@ FROM node:20-alpine AS nodebuild
 
 WORKDIR /app
 
-COPY . $WORKDIR
+ARG NODE_ENV
+ENV NODE_ENV=${NODE_ENV}
 
-RUN pwd
-RUN ls -al
+COPY . .
 
-# Set the default value for NODE_ENV
-ARG NODE_ENV=development
+RUN npm install -g npm@10
 
-# Replace the line containing NODE_ENV if it exists, or append it otherwise
-RUN touch .env.local && \
-    sed -i '/^NODE_ENV=/s/.*/NODE_ENV='${NODE_ENV}'/' .env.local || \
-    echo "NODE_ENV=${NODE_ENV}" >> .env.local
-
-RUN cat .env.local
-
-RUN npm install -g npm
 RUN npm install
 RUN npm run build
 
