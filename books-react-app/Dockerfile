@@ -8,13 +8,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN if [ "$NODE_ENV" != "production" ]; then \
-        if [ -f ".env.${NODE_ENV}" ]; then \
-            cp .env.${NODE_ENV} .env.production; \
-        fi; \
-        if [ -f ".env.${NODE_ENV}.local" ]; then \
-            cp .env.${NODE_ENV}.local .env.production.local; \
-        fi; \
+RUN if [ -n "$NODE_ENV" ] && [ "$NODE_ENV" != "production" ] && [ -f ".env.${NODE_ENV}" ]; then \
+        cp .env.${NODE_ENV} .env.production; \
     fi
 
 RUN npm install -g npm@10
