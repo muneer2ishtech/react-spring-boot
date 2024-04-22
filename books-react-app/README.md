@@ -50,9 +50,23 @@
 
 ## Docker
 
+- To build docker
+    - If you want to build for specific environment, you can pass `NODE_ENV` argument
+        - E.g. `--build-arg NODE_ENV=development`
+    - Default value for argument `NODE_ENV` is `production`
+
 ```
 docker build --build-arg NODE_ENV=production -f Dockerfile . -t muneer2ishtech/books-react-app:0.1.0
 ```
+
+- To run
+    - Using `docker run`
+
+```
+docker run --name=books-react-nginx-container -p 80:80  muneer2ishtech/books-react-app:0.1.0
+```
+
+    - Using `compose`
 
 ```
 NODE_ENV=development docker compose up --build
