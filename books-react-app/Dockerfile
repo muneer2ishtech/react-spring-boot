@@ -4,6 +4,11 @@ FROM node:20-alpine AS nodebuild
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
+RUN if [ -z "$NODE_ENV" ]; then \
+        echo "Error: NODE_ENV variable is not set."; \
+        exit 1; \
+    fi
+
 WORKDIR /app
 
 COPY . .
